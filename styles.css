@@ -179,3 +179,50 @@ body {
 .card.wrong {
     animation: shake 0.5s ease-in-out;
 }
+
+.welcome-text {
+    text-align: center;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.game-button {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+}
+
+.game-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+}
+
+.game-button:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 600px) {
+    .welcome-text {
+        font-size: 1.5rem;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+}

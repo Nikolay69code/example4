@@ -25,12 +25,17 @@ async def start(message: types.Message):
 
 @dp.message_handler(content_types=['web_app_data'])
 async def web_app_handler(message: types.Message):
-    data = json.loads(message.web_app_data.data)
-    if data.get('action') == 'share':
-        attempts = data.get('attempts')
-        await message.answer(
-            f"🎮 Я прошел Memory Game за {attempts} попыток! Сможешь лучше?"
-        )
+    try:
+        data = json.loads(message.web_app_data.data)
+        if data.get('action') == 'share':
+            attempts = data.get('attempts')
+            await message.answer(
+                f"🎮 Я прошел Memory Game за {attempts} попыток! Сможешь лучше?"
+            )
+    except json.JSONDecodeError:
+        await message.answer("Произошла ошибка при обработке данных")
+    except Exception as e:
+        await message.answer(f"Произошла ошибка: {str(e)}")
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True) 

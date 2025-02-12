@@ -1,9 +1,11 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
+tg.ready();
 
 const gameBoard = document.getElementById('gameBoard');
 const attemptsCounter = document.getElementById('attempts');
 const shareButton = document.getElementById('shareButton');
+const restartButton = document.getElementById('restartButton');
 
 let attempts = 0;
 let flippedCards = [];
@@ -81,6 +83,8 @@ function checkMatch() {
         if (matchedPairs === images.length) {
             setTimeout(() => {
                 alert(`Поздравляем! Вы выиграли за ${attempts} попыток!`);
+                shareButton.style.display = 'block';
+                restartButton.style.display = 'block';
             }, 500);
         }
     } else {
@@ -97,8 +101,19 @@ function checkMatch() {
 shareButton.addEventListener('click', () => {
     tg.sendData(JSON.stringify({
         action: 'share',
-        attempts: attempts
+        attempts: attempts.toString()
     }));
+});
+
+restartButton.addEventListener('click', () => {
+    attempts = 0;
+    matchedPairs = 0;
+    flippedCards = [];
+    attemptsCounter.textContent = attempts;
+    
+    gameBoard.innerHTML = '';
+    
+    initGame();
 });
 
 // Инициализация игры
