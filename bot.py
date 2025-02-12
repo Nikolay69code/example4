@@ -4,7 +4,7 @@ from aiogram.types import WebAppInfo
 from aiogram.utils import executor
 import json
 
-API_TOKEN = 'YOUR_BOT_TOKEN'
+API_TOKEN = '7488513286:AAEXGjLkF6QLsx0ZLusd_kK-p7cHq_xs07g'
 WEBAPP_URL = 'https://memory-game.site'
 
 bot = Bot(token=API_TOKEN)
