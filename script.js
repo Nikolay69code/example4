@@ -75,6 +75,8 @@ function checkMatch() {
 
     if (match) {
         matchedPairs++;
+        card1.classList.add('matched');
+        card2.classList.add('matched');
         flippedCards = [];
         if (matchedPairs === images.length) {
             setTimeout(() => {
@@ -82,9 +84,11 @@ function checkMatch() {
             }, 500);
         }
     } else {
+        card1.classList.add('wrong');
+        card2.classList.add('wrong');
         setTimeout(() => {
-            card1.classList.remove('flipped');
-            card2.classList.remove('flipped');
+            card1.classList.remove('flipped', 'wrong');
+            card2.classList.remove('flipped', 'wrong');
             flippedCards = [];
         }, 1000);
     }
