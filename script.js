@@ -4,8 +4,11 @@ tg.ready();
 
 const gameBoard = document.getElementById('gameBoard');
 const attemptsCounter = document.getElementById('attempts');
-const shareButton = document.getElementById('shareButton');
 const restartButton = document.getElementById('restartButton');
+const adminButton = document.getElementById('adminButton');
+const adminModal = document.getElementById('adminModal');
+const adminForm = document.getElementById('adminForm');
+const closeModal = document.getElementById('closeModal');
 
 let attempts = 0;
 let flippedCards = [];
@@ -21,8 +24,7 @@ const images = [
     'images/photo6.jpg',
     'images/photo7.jpg',
     'images/photo8.jpg',
-    'images/photo9.jpg',
-    'images/photo10.jpg'
+    'images/photo9.jpg'
 ];
 
 // Создаем дубликаты карточек
@@ -83,7 +85,6 @@ function checkMatch() {
         if (matchedPairs === images.length) {
             setTimeout(() => {
                 alert(`Поздравляем! Вы выиграли за ${attempts} попыток!`);
-                shareButton.style.display = 'block';
                 restartButton.style.display = 'block';
             }, 500);
         }
@@ -97,13 +98,6 @@ function checkMatch() {
         }, 1000);
     }
 }
-
-shareButton.addEventListener('click', () => {
-    tg.sendData(JSON.stringify({
-        action: 'share',
-        attempts: attempts.toString()
-    }));
-});
 
 restartButton.addEventListener('click', () => {
     attempts = 0;
@@ -125,4 +119,36 @@ function initGame() {
     });
 }
 
-initGame(); 
+initGame();
+
+adminButton.addEventListener('click', () => {
+    adminModal.style.display = 'block';
+});
+
+closeModal.addEventListener('click', () => {
+    adminModal.style.display = 'none';
+    adminForm.reset();
+});
+
+adminForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const login = document.getElementById('login').value;
+    const password = document.getElementById('password').value;
+
+    if (login === 'famous' && password === 'proger2025') {
+        adminModal.style.display = 'none';
+        adminForm.reset();
+        // Перенаправляем на страницу администратора
+        window.location.href = '/admin.html';
+    } else {
+        alert('Неверный логин или пароль');
+    }
+});
+
+// Закрытие модального окна при клике вне его
+window.addEventListener('click', (e) => {
+    if (e.target === adminModal) {
+        adminModal.style.display = 'none';
+        adminForm.reset();
+    }
+}); 
